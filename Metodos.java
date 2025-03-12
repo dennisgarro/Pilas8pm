@@ -10,7 +10,6 @@ public class Metodos {
 
     public Stack<vehiculo> LLenarPila1() {
         Stack<vehiculo> pila = new Stack<>();
-        Scanner sc = new Scanner(System.in);
         Boolean bandera = true;
 
         while (bandera) {
@@ -77,22 +76,62 @@ public class Metodos {
         }
     }
 
-    public void MostrarRegistro(Stack<vehiculo> pila) {
+    public void Registro(Stack<vehiculo> pila, int opt) {
         String marca = "";
         boolean existe = false;
-        System.out.println("ingrese la marca que desea buscar");
+        if (opt == 1) {
+            System.out.println("ingrese la marca que desea buscar");
+        } else {
+            System.out.println("ingrese la marca que desea Eliminar");
+        }
+
         marca = sc.next();
-        for (vehiculo o : pila) {
-            if (marca.equalsIgnoreCase(o.getMarca())) {
-                System.out.println(o.getMarca());
-                System.out.println(o.getColor());
-                System.out.println(o.getPrecio());
-                existe = true;
+        if (opt == 1) {
+            for (vehiculo o : pila) {
+                if (marca.equalsIgnoreCase(o.getMarca())) {
+                    System.out.println(o.getMarca());
+                    System.out.println(o.getColor());
+                    System.out.println(o.getPrecio());
+                    existe = true;
+                }
+
             }
+            if (!existe) {
+                System.out.println("la marca no existe o ne se encuentra");
+            }
+        } else {
+            Stack<vehiculo> pilaaux = new Stack<>();
+            for (vehiculo carrito : pila) {
+                if (carrito.getMarca().equalsIgnoreCase(marca)) {
+                    pila.remove(carrito);
+                    System.out.println("registro eliminado");
+
+                }
+            }
+            while (!pilaaux.isEmpty()) {
+                pila.push(pilaaux.pop());
+            }
+            MostrarPila(pila);
 
         }
-        if (!existe) {
-            System.out.println("la marca no existe o ne se encuentra");
+
+    }
+
+    public void ModificarRegistro(Stack<vehiculo> pila) {
+        String marca = "";
+        System.out.println("ingrese la marca del registro que desea modificar");
+        marca = sc.next();
+        for (vehiculo vehiculo : pila) {
+            if (vehiculo.getMarca().equalsIgnoreCase(marca)) {
+                vehiculo o = new vehiculo();
+                System.out.println("ingrese el precio");
+                o.setPrecio(sc.nextInt());
+                System.out.println("ingrese el color");
+                o.setColor(sc.next());
+                o.setMarca(marca);
+                vehiculo = o;
+            }
         }
+        MostrarPila(pila);
     }
 }
