@@ -1,8 +1,6 @@
-import java.util.Stack;
-
-import javax.swing.JOptionPane;
-
 import java.util.Scanner;
+import java.util.Stack;
+import javax.swing.JOptionPane;
 
 public class Metodos {
     int opt = 0;
@@ -123,13 +121,13 @@ public class Metodos {
         marca = sc.next();
         for (vehiculo vehiculo : pila) {
             if (vehiculo.getMarca().equalsIgnoreCase(marca)) {
-                vehiculo o = new vehiculo();
+
                 System.out.println("ingrese el precio");
-                o.setPrecio(sc.nextInt());
+                vehiculo.setPrecio(sc.nextInt());
                 System.out.println("ingrese el color");
-                o.setColor(sc.next());
-                o.setMarca(marca);
-                vehiculo = o;
+                vehiculo.setColor(sc.next());
+                vehiculo.setMarca(marca);
+
             }
         }
         MostrarPila(pila);
